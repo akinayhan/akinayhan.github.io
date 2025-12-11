@@ -8,9 +8,11 @@
 
   <style>
     :root {
-      --bg: #0a0f1f;
-      --text: #e8eef7;
+      --bg: #070b16;
+      --text: #dfe7f2;
       --accent: #5eead4;
+      --logo: #3cf2ff;
+      --slogan: #7bb7ff; 
       font-family: "Inter", system-ui, sans-serif;
     }
 
@@ -37,46 +39,68 @@
     .container {
       position: relative;
       z-index: 2;
+      width: 90%;
+      max-width: 650px;
       text-align: center;
       animation: fadeIn 2s ease forwards;
     }
 
     h1 {
-      font-size: clamp(28px, 6vw, 60px);
+      font-size: clamp(32px, 7vw, 64px);
       font-weight: 700;
-      margin-bottom: 12px;
+      color: var(--logo);
+      text-shadow:
+        0 0 4px var(--logo),
+        0 0 8px var(--logo),
+        0 0 16px rgba(60,242,255,0.4);
+      margin-bottom: 14px;
+      animation: pulseLogo 10s infinite ease-in-out;
+    }
+
+    @keyframes pulseLogo {
+      0%,100% { text-shadow: 0 0 8px rgba(60,242,255,0.4); }
+      50%     { text-shadow: 0 0 18px rgba(60,242,255,0.9); }
     }
 
     .slogan {
-      color: var(--accent);
-      font-size: clamp(14px, 2.5vw, 18px);
-      margin-bottom: 20px;
-      opacity: 0.85;
-      text-shadow: 0 0 8px rgba(94, 234, 212, 0.3);
+      color: var(--slogan);
+      font-size: clamp(14px, 3vw, 20px);
+      margin-bottom: 22px;
+      opacity: 0.9;
+      letter-spacing: 1px;
+      text-shadow: 0 0 6px rgba(123,183,255,0.35);
     }
 
     .typewriter {
-      font-size: clamp(16px, 3vw, 22px);
+      font-size: clamp(14px, 3.5vw, 22px);
       color: var(--accent);
       font-weight: 400;
-      height: 28px;
-      overflow: hidden;
-      border-right: 2px solid var(--accent);
-      white-space: nowrap;
-      animation: cursorBlink 0.8s infinite;
-      margin: 0 auto;
+      min-height: 40px;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
+      display: inline-flex;
+      align-items: flex-start;
+      line-height: 1.4;
     }
 
-    footer {
-      margin-top: 20px;
-      font-size: 0.9rem;
-      opacity: 0.6;
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      background: var(--accent);
+      animation: cursorBlink 0.7s infinite;
+      margin-left: 1px;
     }
 
     @keyframes cursorBlink {
-      0% { border-color: var(--accent); }
-      50% { border-color: transparent; }
-      100% { border-color: var(--accent); }
+      0%,100% {opacity:1;}
+      50% {opacity:0;}
+    }
+
+    footer {
+      margin-top: 24px;
+      font-size: 0.9rem;
+      opacity: 0.6;
     }
 
     @keyframes fadeIn {
@@ -92,48 +116,53 @@
 
   <div class="container">
     <h1>akinayhan.com</h1>
-
     <div class="slogan">01000001 — Her şey bir bit’le başlar.</div>
-
-    <div class="typewriter" id="typewriter"></div>
-
+    <div class="typewriter" id="typewriter">
+      <span id="twText"></span><span class="cursor" id="cursor"></span>
+    </div>
     <footer>© <span id="year"></span></footer>
   </div>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  const messages = [
-    "Kodlar kıpırdamaya başladı… Arka planda işler karışık :) Çok yakında yayındayız.",
-    "Yeni şeyler deniyoruz… Bazen bozuyoruz, bazen güzelleştiriyoruz.",
-    "Sistem çevrimiçi olduğunda ilk siz göreceksiniz."
-  ];
+const messages = [
+  "Kodlar kıpırdamaya başladı… Arka planda işler karışık :) Çok yakında yayındayız.",
+  "Yeni şeyler deniyoruz… Bazen bozuyoruz, bazen güzelleştiriyoruz.",
+  "Döngüler bitmez, ama her adım bir şey öğretir…",
+  "0 ve 1 arasında kaybolmak, bazen tüm evreni görmek demektir.",
+  "Kod satırları gibi düşünceler de derinleşir… ve bazen hata verir.",
+  "Algoritmalar sessizce dünyayı şekillendirir, fark eden azdır.",
+  "Bir if koşulu, bir hayat seçimi kadar önemlidir."
+];
+
 
   let msgIndex = 0;
   let charIndex = 0;
-  const speed = 55;
-  const tw = document.getElementById("typewriter");
+  const speed = 45;
+
+  const twText = document.getElementById("twText");
 
   function type() {
     const current = messages[msgIndex];
     if (charIndex < current.length) {
-      tw.textContent += current.charAt(charIndex);
+      twText.textContent = current.substring(0, charIndex + 1);
       charIndex++;
       setTimeout(type, speed);
     } else {
-      setTimeout(() => erase(), 1600);
+      setTimeout(erase, 1800);
     }
   }
 
   function erase() {
     const current = messages[msgIndex];
     if (charIndex > 0) {
-      tw.textContent = current.substring(0, charIndex - 1);
+      twText.textContent = current.substring(0, charIndex - 1);
       charIndex--;
-      setTimeout(erase, 35);
+      setTimeout(erase, 28);
     } else {
       msgIndex = (msgIndex + 1) % messages.length;
-      setTimeout(type, 300);
+      setTimeout(type, 400);
     }
   }
 
@@ -157,8 +186,8 @@
     reset() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.5;
-      this.vy = (Math.random() - 0.5) * 0.5;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
       this.size = Math.random() * 2 + 1;
     }
     update() {
@@ -188,5 +217,6 @@
   initParticles();
   animate();
 </script>
- </body>
+
+</body>
 </html>
