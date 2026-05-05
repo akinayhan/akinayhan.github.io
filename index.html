@@ -1,222 +1,428 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>akinayhan.com — Coming Soon</title>
-  <meta name="description" content="akinayhan.com yakında yayında." />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>akinayhan.com</title>
 
-  <style>
-    :root {
-      --bg: #070b16;
-      --text: #dfe7f2;
-      --accent: #5eead4;
-      --logo: #3cf2ff;
-      --slogan: #7bb7ff; 
-      font-family: "Inter", system-ui, sans-serif;
-    }
+<style>
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+/* ===================== THEME ===================== */
+:root {
+  --bg: #070b16;
+  --text: #dfe7f2;
+  --accent: #5eead4;
+  --logo: #3cf2ff;
+  --slogan: #7bb7ff;
+  --particle: rgba(94,234,212,0.45);
+  --debug-bg: rgba(0,0,0,0.6);
+}
 
-    body {
-      height: 100vh;
-      background: var(--bg);
-      overflow: hidden;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+[data-theme="light"] {
+  --bg: #f4f6f9;
+  --text: #111827;
+  --accent: #4b5563;
+  --logo: #374151;
+  --slogan: #6b7280;
+  --particle: rgba(55,65,81,0.18);
+  --debug-bg: rgba(255,255,255,0.75);
+}
 
-    #particles {
-      position: absolute;
-      top:0; left:0;
-      width:100%; height:100%;
-      z-index:0;
-    }
+/* ===================== BASE ===================== */
+* {margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif;}
 
-    .container {
-      position: relative;
-      z-index: 2;
-      width: 90%;
-      max-width: 650px;
-      text-align: center;
-      animation: fadeIn 2s ease forwards;
-    }
+body {
+  height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
 
-    h1 {
-      font-size: clamp(32px, 7vw, 64px);
-      font-weight: 700;
-      color: var(--logo);
-      text-shadow:
-        0 0 4px var(--logo),
-        0 0 8px var(--logo),
-        0 0 16px rgba(60,242,255,0.4);
-      margin-bottom: 14px;
-      animation: pulseLogo 10s infinite ease-in-out;
-    }
+canvas {position:absolute;inset:0;}
 
-    @keyframes pulseLogo {
-      0%,100% { text-shadow: 0 0 8px rgba(60,242,255,0.4); }
-      50%     { text-shadow: 0 0 18px rgba(60,242,255,0.9); }
-    }
+.container {z-index:10;text-align:center;max-width:650px;}
 
-    .slogan {
-      color: var(--slogan);
-      font-size: clamp(14px, 3vw, 20px);
-      margin-bottom: 22px;
-      opacity: 0.9;
-      letter-spacing: 1px;
-      text-shadow: 0 0 6px rgba(123,183,255,0.35);
-    }
+h1 {
+  color:var(--logo);
+  font-size:clamp(32px,7vw,64px);
+  margin-bottom:10px;
+}
 
-    .typewriter {
-      font-size: clamp(14px, 3.5vw, 22px);
-      color: var(--accent);
-      font-weight: 400;
-      min-height: 40px;
-      max-width: 100%;
-      overflow-wrap: break-word;
-      white-space: pre-wrap;
-      display: inline-flex;
-      align-items: flex-start;
-      line-height: 1.4;
-    }
+.slogan {color:var(--slogan);margin-bottom:20px;}
 
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      background: var(--accent);
-      animation: cursorBlink 0.7s infinite;
-      margin-left: 1px;
-    }
+.typewriter {
+  color:var(--accent);
+  min-height:60px;
+  line-height:1.5;
+}
 
-    @keyframes cursorBlink {
-      0%,100% {opacity:1;}
-      50% {opacity:0;}
-    }
+.cursor {
+  display:inline-block;
+  width:2px;
+  height:1em;
+  background:var(--accent);
+  animation:blink .7s infinite;
+}
 
-    footer {
-      margin-top: 24px;
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
+@keyframes blink {50%{opacity:0;}}
 
-    @keyframes fadeIn {
-      from { opacity:0; transform: translateY(20px); }
-      to   { opacity:1; transform: translateY(0); }
-    }
-  </style>
+footer {margin-top:20px;opacity:.6;font-size:.85rem;}
+
+/* ===================== FLOATING POEM ===================== */
+#floatingQuotes {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  max-width: 260px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  opacity: 0.8;
+  pointer-events: none;
+  transition: all 1.2s ease;
+}
+
+#floatingQuotes.right {
+  left: auto;
+  right: 20px;
+}
+
+.dust-in {
+  animation: dustIn 1s ease forwards;
+}
+
+.dust-out {
+  animation: dustOut 0.8s ease forwards;
+}
+
+@keyframes dustIn {
+  0% {opacity:0;filter:blur(8px);transform:translateY(10px);}
+  100% {opacity:0.8;filter:blur(0);}
+}
+
+@keyframes dustOut {
+  0% {opacity:0.8;}
+  100% {opacity:0;filter:blur(10px);transform:translateX(40px);}
+}
+
+/* ===================== THEME BTN ===================== */
+#themeToggle {
+  position:absolute;
+  top:15px;
+  right:15px;
+  cursor:pointer;
+  font-size:20px;
+  z-index:999;
+}
+
+/* ===================== DEBUG ===================== */
+#debugBar {
+  position:fixed;
+  top:-50px;
+  left:0;
+  width:100%;
+  padding:10px;
+  text-align:center;
+  background:var(--debug-bg);
+  transition:.4s;
+  z-index:999;
+}
+
+#debugBar.show {top:0;}
+
+/* ===================== WIPE ===================== */
+#themeWipe {
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  opacity:0;
+  transform:translateX(20px);
+  pointer-events:none;
+  z-index:50;
+}
+
+#themeWipe.active {animation:wipe .7s ease forwards;}
+
+@keyframes wipe {
+  0%{opacity:0;transform:translateX(40px);}
+  40%{opacity:1;}
+  100%{opacity:0;transform:translateX(-30px);}
+}
+
+/* ===================== SKY ===================== */
+#sky {position:fixed;inset:0;pointer-events:none;}
+
+.icon {
+  position:absolute;
+  top:18%;
+  right:12%;
+  font-size:50px;
+  opacity:0;
+}
+
+@keyframes rise {
+  0%{opacity:0;transform:translate(40px,60px) scale(.8);}
+  40%{opacity:1;}
+  100%{opacity:0;transform:translate(-20px,-40px);}
+}
+
+@keyframes set {
+  0%{opacity:1;}
+  100%{opacity:0;transform:translate(40px,60px);}
+}
+
+</style>
 </head>
 
 <body>
 
-  <canvas id="particles"></canvas>
+<div id="themeWipe"></div>
 
-  <div class="container">
-    <h1>akinayhan.com</h1>
-    <div class="slogan">01000001 — Her şey bir bit’le başlar.</div>
-    <div class="typewriter" id="typewriter">
-      <span id="twText"></span><span class="cursor" id="cursor"></span>
-    </div>
-    <footer>© <span id="year"></span></footer>
+<div id="sky">
+  <div id="sun" class="icon">☀️</div>
+  <div id="moon" class="icon">🌙</div>
+</div>
+
+<div id="debugBar">Debug modu açıldı… ama aslında hiçbir şey değişmedi.</div>
+
+<canvas id="particles"></canvas>
+
+<div id="themeToggle">🌙</div>
+
+<div class="container">
+  <h1>akinayhan.com</h1>
+  <div class="slogan">01000001 — Her şey bir bit’le başlar.</div>
+
+  <div class="typewriter">
+    <span id="text"></span><span class="cursor"></span>
   </div>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+  <footer>
+    © <span id="year"></span> · akinayhan.com henüz hazır değil… ama zihni çoktan çalışmaya başladı.
+  </footer>
+</div>
 
-const messages = [
-  "Kodlar kıpırdamaya başladı… Arka planda işler karışık :) Çok yakında yayındayız.",
-  "Yeni şeyler deniyoruz… Bazen bozuyoruz, bazen güzelleştiriyoruz.",
-  "Döngüler bitmez, ama her adım bir şey öğretir…",
-  "0 ve 1 arasında kaybolmak, bazen tüm evreni görmek demektir.",
-  "Kod satırları gibi düşünceler de derinleşir… ve bazen hata verir.",
-  "Algoritmalar sessizce dünyayı şekillendirir, fark eden azdır.",
-  "Bir if koşulu, bir hayat seçimi kadar önemlidir."
+<div id="floatingQuotes"></div>
+
+<script>
+
+/* YEAR */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* THEME */
+let theme="dark";
+const toggle=document.getElementById("themeToggle");
+const wipe=document.getElementById("themeWipe");
+const sun=document.getElementById("sun");
+const moon=document.getElementById("moon");
+
+function icon(){toggle.textContent=theme==="dark"?"🌙":"☀️";}
+icon();
+
+toggle.onclick=()=>{
+  wipe.classList.add("active");
+  const next=theme==="dark"?"light":"dark";
+
+  if(next==="light"){
+    moon.style.animation="set .6s forwards";
+    setTimeout(()=>sun.style.animation="rise .7s forwards",200);
+  }else{
+    sun.style.animation="set .6s forwards";
+    setTimeout(()=>moon.style.animation="rise .7s forwards",200);
+  }
+
+  setTimeout(()=>{
+    if(next==="light"){
+      document.documentElement.setAttribute("data-theme","light");
+      theme="light";
+    }else{
+      document.documentElement.removeAttribute("data-theme");
+      theme="dark";
+    }
+    icon();
+    refillDeck();
+  },300);
+
+  setTimeout(()=>{
+    wipe.classList.remove("active");
+    sun.style.animation="";
+    moon.style.animation="";
+  },800);
+};
+
+/* DEBUG */
+let clicks=0;
+document.body.onclick=()=>{
+  if(++clicks===5){
+    debugBar.classList.add("show");
+    setTimeout(()=>debugBar.classList.remove("show"),3000);
+    clicks=0;
+  }
+};
+
+/* ===================== MESSAGES ===================== */
+const generalMessages = [
+"Bu site boş değil, sadece acele etmiyor.",
+"Kodlar kıpırdamaya başladı… Arka planda işler karışık :) Çok yakında yayındayız.",
+"Yeni şeyler deniyoruz… Bazen bozuyoruz, bazen güzelleştiriyoruz.",
+"Döngüler bitmez, ama her adım bir şey öğretir…",
+"Bir if koşulu, bir hayat seçimi kadar önemlidir.",
+"Her şey mantıklıydı… ta ki çalıştırana kadar.",
+"Kod satırları gibi düşünceler de derinleşir… ve bazen hata verir.",
+"Algoritmalar sessizce dünyayı şekillendirir, fark eden azdır.",
+"Yorum satırları, geçmişteki senin gelecekteki sana bıraktığı notlardır.",
+"Çalışıyorsa dokunma… ama neden çalıştığını da unutma.",
+"Bazı hatalar kodda değil, bakış açısındadır.",
+"Kod sustuğunda, hatalar konuşur.",
+"Kod yazmak değil, ne yazmamak gerektiğini bilmek ustalıktır.",
+"Bazı çözümler hızlıdır, bazıları doğru… nadiren ikisi aynı anda olur.",
+"Her 'geçici çözüm' kalıcı olmaya adaydır.",
+"0 ve 1 arasında sadece veri değil, kararlar da vardır.",
+"Her sistem, kendi kaosunu içinde taşır.",
+"Kontrol sandığın şey, çoğu zaman iyi gizlenmiş rastlantıdır.",
+"Gerçeklik, iyi yazılmış bir simülasyon olabilir.",
+"Her döngü bir çıkış yolu arar.",
+"Her şey deterministik görünür… yeterince yakından bakmazsan."
 ];
 
+const nightMessages = [
+"Bazı şeyler sadece gece anlaşılır.",
+"Işık kapandığında sistemler konuşmaya başlar."
+];
 
-  let msgIndex = 0;
-  let charIndex = 0;
-  const speed = 45;
+const dayMessages = [
+"Her şey aydınlıkken bile bazı şeyler gizlidir.",
+"Gündüz çalışan kod, gece sorgulanır."
+];
 
-  const twText = document.getElementById("twText");
+let deck=[];
 
-  function type() {
-    const current = messages[msgIndex];
-    if (charIndex < current.length) {
-      twText.textContent = current.substring(0, charIndex + 1);
-      charIndex++;
-      setTimeout(type, speed);
-    } else {
-      setTimeout(erase, 1800);
+function refillDeck(){
+  let list=[...generalMessages];
+  list=list.concat(theme==="dark"?nightMessages:dayMessages);
+
+  for(let i=list.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [list[i],list[j]]=[list[j],list[i]];
+  }
+
+  deck=list;
+}
+
+function nextMsg(){
+  if(deck.length===0)refillDeck();
+  return deck.pop();
+}
+
+let msg=nextMsg(),i=0;
+const el=document.getElementById("text");
+
+function type(){
+  if(i<msg.length){
+    el.textContent+=msg[i++];
+    setTimeout(type,35);
+  }else setTimeout(erase,2000);
+}
+
+function erase(){
+  if(i>0){
+    el.textContent=msg.substring(0,--i);
+    setTimeout(erase,20);
+  }else{
+    msg=nextMsg();
+    setTimeout(type,400);
+  }
+}
+
+refillDeck();type();
+
+/* ===================== PARTICLES ===================== */
+const c=document.getElementById("particles");
+const ctx=c.getContext("2d");
+
+function resize(){
+  c.width=innerWidth;
+  c.height=innerHeight;
+}
+resize();
+onresize=resize;
+
+class P{
+  constructor(){
+    this.x=Math.random()*c.width;
+    this.y=Math.random()*c.height;
+    this.vx=(Math.random()-.5)*.6;
+    this.vy=(Math.random()-.5)*.6;
+  }
+  update(){
+    this.x+=this.vx;
+    this.y+=this.vy;
+    if(this.x<0||this.x>c.width||this.y<0||this.y>c.height){
+      this.x=Math.random()*c.width;
+      this.y=Math.random()*c.height;
     }
   }
-
-  function erase() {
-    const current = messages[msgIndex];
-    if (charIndex > 0) {
-      twText.textContent = current.substring(0, charIndex - 1);
-      charIndex--;
-      setTimeout(erase, 28);
-    } else {
-      msgIndex = (msgIndex + 1) % messages.length;
-      setTimeout(type, 400);
-    }
+  draw(){
+    ctx.fillStyle=getComputedStyle(document.documentElement)
+    .getPropertyValue("--particle");
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,1.8,0,Math.PI*2);
+    ctx.fill();
   }
+}
 
-  type();
+let ps=[];
+for(let i=0;i<140;i++)ps.push(new P());
 
-  const canvas = document.getElementById("particles");
-  const ctx = canvas.getContext("2d");
+(function anim(){
+  ctx.clearRect(0,0,c.width,c.height);
+  ps.forEach(p=>{p.update();p.draw();});
+  requestAnimationFrame(anim);
+})();
 
-  let particles = [];
-  const maxParticles = 80;
+/* ===================== FLOATING POEM ===================== */
+const quotes=[
+"Zaman doğru mu bilmiyorum… ama sen geldin.",
+"Belki de mesele zaman değil, fark etme anıdır.",
+"Buraya gelmen planlı değildi… ama oldu.",
+"Geç kaldın sanıyorsan, belki de erken geldin.",
+"Bazı anlar seçilmez… içine düşülür.",
+"Doğru kişi misin bilmiyorum… ama zaman biraz şüpheli.",
+"Zamanın doğru olup olmadığını kim kontrol ediyor ki?",
+"Bu anın bir adı yok… ama sen içindesin.",
+"Burada olman küçük bir tesadüf gibi durmuyor.",
+"Zaman akıyor… ama bazı anlar yerinde kalıyor.",
+"Belki de doğru zaman diye bir şey hiç olmadı."
+];
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resize);
-  resize();
+const box=document.getElementById("floatingQuotes");
+let qi=0,side=false;
 
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
-      this.size = Math.random() * 2 + 1;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
-    }
-    draw() {
-      ctx.fillStyle = "rgba(94,234,212,0.5)";
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
+function flow(){
+  box.classList.remove("dust-in");
+  box.classList.add("dust-out");
 
-  function initParticles() {
-    particles = [];
-    for (let i = 0; i < maxParticles; i++) particles.push(new Particle());
-  }
+  setTimeout(()=>{
+    side=!side;
+    box.classList.toggle("right",side);
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(animate);
-  }
+    box.textContent=quotes[qi];
+    qi=(qi+1)%quotes.length;
 
-  initParticles();
-  animate();
+    box.classList.remove("dust-out");
+    box.classList.add("dust-in");
+  },800);
+}
+
+box.textContent=quotes[0];
+box.classList.add("dust-in");
+qi=1;
+
+setInterval(flow,3500);
+
 </script>
-
 </body>
 </html>
