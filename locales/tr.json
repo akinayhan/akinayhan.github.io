@@ -1,0 +1,55 @@
+{
+  "slogan": "01000001 — Her şey bir bit’le başlar.",
+  "debug": "Debug modu açıldı… ama aslında hiçbir şey değişmedi.",
+  "footer": "akinayhan.com henüz hazır değil… ama zihni çoktan çalışmaya başladı.",
+
+  "messages": {
+    "general": [
+      "Bu site boş değil, sadece acele etmiyor.",
+      "Kodlar kıpırdamaya başladı… Arka planda işler karışık :) Çok yakında yayındayız.",
+      "Yeni şeyler deniyoruz… Bazen bozuyoruz, bazen güzelleştiriyoruz.",
+      "Döngüler bitmez, ama her adım bir şey öğretir…",
+      "Bir if koşulu, bir hayat seçimi kadar önemlidir.",
+      "Her şey mantıklıydı… ta ki çalıştırana kadar.",
+      "Kod satırları gibi düşünceler de derinleşir… ve bazen hata verir.",
+      "Algoritmalar sessizce dünyayı şekillendirir, fark eden azdır.",
+      "Yorum satırları, geçmişteki senin gelecekteki sana bıraktığı notlardır.",
+      "Çalışıyorsa dokunma… ama neden çalıştığını da unutma.",
+      "Bazı hatalar kodda değil, bakış açısındadır.",
+      "Kod sustuğunda, hatalar konuşur.",
+      "Kod yazmak değil, ne yazmamak gerektiğini bilmek ustalıktır.",
+      "Bazı çözümler hızlıdır, bazıları doğru… nadiren ikisi aynı anda olur.",
+      "Her 'geçici çözüm' kalıcı olmaya adaydır.",
+      "0 ve 1 arasında sadece veri değil, kararlar da vardır.",
+      "Her sistem, kendi kaosunu içinde taşır.",
+      "Kontrol sandığın şey, çoğu zaman iyi gizlenmiş rastlantıdır.",
+      "Gerçeklik, iyi yazılmış bir simülasyon olabilir.",
+      "Her döngü bir çıkış yolu arar.",
+      "Her şey deterministik görünür… yeterince yakından bakmazsan."
+    ],
+
+    "night": [
+      "Bazı şeyler sadece gece anlaşılır.",
+      "Işık kapandığında sistemler konuşmaya başlar."
+    ],
+
+    "day": [
+      "Her şey aydınlıkken bile bazı şeyler gizlidir.",
+      "Gündüz çalışan kod, gece sorgulanır."
+    ]
+  },
+
+  "quotes": [
+    "Zaman doğru mu bilmiyorum… ama sen geldin.",
+    "Belki de mesele zaman değil, fark etme anıdır.",
+    "Buraya gelmen planlı değildi… ama oldu.",
+    "Geç kaldın sanıyorsan, belki de erken geldin.",
+    "Bazı anlar seçilmez… içine düşülür.",
+    "Doğru kişi misin bilmiyorum… ama zaman biraz şüpheli.",
+    "Zamanın doğru olup olmadığını kim kontrol ediyor ki?",
+    "Bu anın bir adı yok… ama sen içindesin.",
+    "Burada olman küçük bir tesadüf gibi durmuyor.",
+    "Zaman akıyor… ama bazı anlar yerinde kalıyor.",
+    "Belki de doğru zaman diye bir şey hiç olmadı."
+  ]
+}

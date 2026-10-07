@@ -1,0 +1,598 @@
+/* ===================== THEME ===================== */
+
+:root {
+  --bg: #070b16;
+  --text: #dfe7f2;
+  --accent: #5eead4;
+  --logo: #3cf2ff;
+  --slogan: #7bb7ff;
+  --particle: rgba(94,234,212,0.45);
+  --debug-bg: rgba(0,0,0,0.6);
+}
+
+[data-theme="light"] {
+  --bg: #f4f6f9;
+  --text: #111827;
+  --accent: #4b5563;
+  --logo: #374151;
+  --slogan: #6b7280;
+  --particle: rgba(55,65,81,0.18);
+  --debug-bg: rgba(255,255,255,0.75);
+}
+
+
+/* ===================== BASE ===================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.container {
+  z-index: 10;
+  text-align: center;
+  max-width: 650px;
+}
+
+h1 {
+  color: var(--logo);
+  font-size: clamp(32px, 7vw, 64px);
+  margin-bottom: 10px;
+}
+
+.slogan {
+  color: var(--slogan);
+  margin-bottom: 20px;
+}
+
+.typewriter {
+  color: var(--accent);
+  min-height: 60px;
+  line-height: 1.5;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--accent);
+  animation: blink .7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+footer {
+  margin-top: 20px;
+  opacity: .6;
+  font-size: .85rem;
+}
+
+
+/* ===================== FLOATING POEM ===================== */
+
+#floatingQuotes {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  max-width: 260px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  opacity: 0.8;
+  pointer-events: none;
+  transition: all 1.2s ease;
+}
+
+#floatingQuotes.right {
+  left: auto;
+  right: 20px;
+}
+
+.dust-in {
+  animation: dustIn 1s ease forwards;
+}
+
+.dust-out {
+  animation: dustOut 0.8s ease forwards;
+}
+
+@keyframes dustIn {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 0.8;
+    filter: blur(0);
+  }
+}
+
+@keyframes dustOut {
+  0% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(40px);
+  }
+}
+
+
+/* ===================== THEME BUTTON ===================== */
+
+#themeToggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 999;
+}
+
+
+/* ===================== LANGUAGE SWITCHER ===================== */
+
+#languageSwitcher {
+  position: absolute;
+  top: 13px;
+  right: 52px;
+  z-index: 1000;
+}
+
+#languageButton {
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+
+  background: transparent;
+  color: var(--text);
+
+  font-size: 17px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  opacity: .75;
+
+  transition:
+    opacity .2s ease,
+    background .2s ease,
+    transform .2s ease;
+}
+
+#languageButton:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+#languageButton.active {
+  background: var(--accent);
+  color: var(--bg);
+  opacity: 1;
+}
+
+
+/* ===================== LANGUAGE MENU ===================== */
+
+#languageMenu {
+  position: absolute;
+
+  top: 40px;
+  right: 0;
+
+  width: 150px;
+
+  padding: 6px;
+
+  background: var(--bg);
+
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, .25);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translateY(-6px)
+    scale(.97);
+
+  transform-origin: top right;
+
+  transition:
+    opacity .18s ease,
+    visibility .18s ease,
+    transform .18s ease;
+}
+
+#languageSwitcher.open #languageMenu {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+/* ===================== LANGUAGE ITEMS ===================== */
+
+#languageMenu button {
+  display: block;
+
+  width: 100%;
+
+  padding: 8px 10px;
+
+  border: 0;
+  border-radius: 5px;
+
+  background: transparent;
+  color: var(--text);
+
+  text-align: left;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    background .15s ease,
+    color .15s ease;
+}
+
+#languageMenu button:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+#languageMenu button.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+
+/* ===================== DEBUG ===================== */
+
+#debugBar {
+  position: fixed;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background: var(--debug-bg);
+  transition: .4s;
+  z-index: 999;
+}
+
+#debugBar.show {
+  top: 0;
+}
+
+
+/* ===================== WIPE ===================== */
+
+#themeWipe {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+  z-index: 50;
+}
+
+#themeWipe.active {
+  animation: wipe .7s ease forwards;
+}
+
+@keyframes wipe {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+
+/* ===================== SKY ===================== */
+
+#sky {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.icon {
+  position: absolute;
+  top: 18%;
+  right: 12%;
+  font-size: 50px;
+  opacity: 0;
+}
+
+@keyframes rise {
+  0% {
+    opacity: 0;
+    transform: translate(40px, 60px) scale(.8);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-20px, -40px);
+  }
+}
+
+@keyframes set {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(40px, 60px);
+  }
+}
+
+
+/* ===================== MOBILE ===================== */
+
+@media (max-width: 600px) {
+
+  #languageSwitcher {
+    right: 50px;
+    top: 13px;
+  }
+
+  #languageMenu {
+    width: 145px;
+  }
+
+  #themeToggle {
+    right: 12px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  #floatingQuotes {
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    max-width: 220px;
+  }
+
+  #floatingQuotes.right {
+    left: auto;
+    right: 15px;
+  }
+
+}
+
+/* ===================== EASTER BUNNY ===================== */
+
+#easterBunny {
+  position: fixed;
+  left: -100px;
+  bottom: 9%;
+  width: 80px;
+  height: 65px;
+  z-index: 998;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#easterBunny.run {
+  animation: rabbitRun 4.2s linear forwards;
+}
+
+.rabbit {
+  position: relative;
+  width: 80px;
+  height: 65px;
+  transform-origin: center bottom;
+  animation: rabbitHop .38s ease-in-out infinite;
+}
+
+/* ===================== BODY ===================== */
+
+.rabbit-body {
+  position: absolute;
+  width: 42px;
+  height: 28px;
+  left: 17px;
+  top: 25px;
+  background: var(--accent);
+  border-radius: 55% 50% 45% 50%;
+  box-shadow: 0 0 10px rgba(94, 234, 212, .2);
+}
+
+/* ===================== HEAD ===================== */
+
+.rabbit-head {
+  position: absolute;
+  width: 25px;
+  height: 24px;
+  left: 48px;
+  top: 18px;
+  background: var(--accent);
+  border-radius: 50% 55% 45% 50%;
+}
+
+/* ===================== EARS ===================== */
+
+.rabbit-ear {
+  position: absolute;
+  width: 9px;
+  height: 28px;
+  background: var(--accent);
+  border-radius: 70% 70% 40% 40%;
+  transform-origin: bottom center;
+}
+
+.rabbit-ear-back {
+  left: 50px;
+  top: -4px;
+  transform: rotate(-12deg);
+}
+
+.rabbit-ear-front {
+  left: 61px;
+  top: -7px;
+  height: 31px;
+  transform: rotate(8deg);
+}
+
+/* ===================== EYE ===================== */
+
+.rabbit-eye {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  left: 64px;
+  top: 26px;
+  background: var(--bg);
+  border-radius: 50%;
+}
+
+/* ===================== NOSE ===================== */
+
+.rabbit-nose {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  left: 70px;
+  top: 31px;
+  background: var(--bg);
+  border-radius: 50%;
+}
+
+/* ===================== TAIL ===================== */
+
+.rabbit-tail {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 5px;
+  top: 22px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* ===================== LEGS ===================== */
+
+.rabbit-leg {
+  position: absolute;
+  width: 22px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  transform-origin: right center;
+}
+
+.rabbit-leg-back {
+  left: 11px;
+  top: 48px;
+  transform: rotate(18deg);
+  animation: backLeg .19s ease-in-out infinite alternate;
+}
+
+.rabbit-leg-front {
+  left: 45px;
+  top: 45px;
+  width: 19px;
+  transform: rotate(-20deg);
+  animation: frontLeg .19s ease-in-out infinite alternate;
+}
+
+/* ===================== MOVEMENT ===================== */
+
+@keyframes rabbitRun {
+  0% {
+    left: -100px;
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  100% {
+    left: calc(100% + 100px);
+    opacity: 0;
+  }
+}
+
+@keyframes rabbitHop {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-13px) rotate(-2deg);
+  }
+}
+
+@keyframes backLeg {
+  0% {
+    transform: rotate(35deg);
+  }
+
+  100% {
+    transform: rotate(-25deg);
+  }
+}
+
+@keyframes frontLeg {
+  0% {
+    transform: rotate(-30deg);
+  }
+
+  100% {
+    transform: rotate(30deg);
+  }
+}

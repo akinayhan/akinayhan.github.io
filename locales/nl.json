@@ -1,0 +1,55 @@
+{
+  "slogan": "01000001 — Alles begint met één bit.",
+  "debug": "Debugmodus geactiveerd… maar eigenlijk is er niets veranderd.",
+  "footer": "akinayhan.com is nog niet klaar… maar de geest is al aan het werk.",
+
+  "messages": {
+    "general": [
+      "Deze site is niet leeg, hij heeft gewoon geen haast.",
+      "De code is begonnen te bewegen… Op de achtergrond wordt het ingewikkeld :) We zijn heel binnenkort live.",
+      "We proberen nieuwe dingen… Soms maken we ze kapot, soms maken we ze mooier.",
+      "Lussen eindigen nooit, maar elke stap leert je iets…",
+      "Een if-voorwaarde kan net zo belangrijk zijn als een beslissing in het leven.",
+      "Alles was logisch… totdat we het uitvoerden.",
+      "Gedachten worden net als regels code steeds dieper… en soms geven ze fouten.",
+      "Algoritmes vormen stilletjes de wereld; maar weinig mensen merken het.",
+      "Commentaarregels zijn notities die je vroegere zelf achterlaat voor je toekomstige zelf.",
+      "Als het werkt, blijf er dan vanaf… maar vergeet niet waarom het werkt.",
+      "Sommige fouten zitten niet in de code, maar in het perspectief.",
+      "Wanneer de code zwijgt, beginnen de fouten te praten.",
+      "Meesterschap betekent niet weten hoe je code schrijft, maar weten wat je niet moet schrijven.",
+      "Sommige oplossingen zijn snel, andere zijn juist… zelden zijn ze allebei.",
+      "Elke 'tijdelijke oplossing' heeft de neiging permanent te worden.",
+      "Tussen 0 en 1 zitten niet alleen gegevens, maar ook beslissingen.",
+      "Elk systeem draagt zijn eigen chaos met zich mee.",
+      "Wat je voor controle houdt, is vaak gewoon een goed verborgen toeval.",
+      "De werkelijkheid zou een goed geschreven simulatie kunnen zijn.",
+      "Elke lus zoekt naar een uitgang.",
+      "Alles lijkt deterministisch… als je niet goed genoeg kijkt."
+    ],
+
+    "night": [
+      "Sommige dingen begrijp je alleen 's nachts.",
+      "Wanneer de lichten uitgaan, beginnen systemen te praten."
+    ],
+
+    "day": [
+      "Zelfs als alles helder is, blijven sommige dingen verborgen.",
+      "Code die overdag werkt, wordt 's nachts in twijfel getrokken."
+    ]
+  },
+
+  "quotes": [
+    "Ik weet niet of de timing goed is… maar je bent gekomen.",
+    "Misschien gaat het niet om tijd, maar om het moment waarop je iets beseft.",
+    "Je was niet van plan hier te komen… maar je bent er.",
+    "Als je denkt dat je te laat bent, ben je misschien te vroeg gekomen.",
+    "Sommige momenten kies je niet… je valt er gewoon in.",
+    "Ik weet niet of jij de juiste persoon bent… maar de timing is verdacht.",
+    "Wie controleert eigenlijk of dit het juiste moment is?",
+    "Dit moment heeft geen naam… maar jij bent erin.",
+    "Dat je hier bent, lijkt niet op een klein toeval.",
+    "De tijd stroomt… maar sommige momenten blijven stilstaan.",
+    "Misschien heeft het juiste moment nooit bestaan."
+  ]
+}

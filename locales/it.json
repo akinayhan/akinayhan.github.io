@@ -1,0 +1,55 @@
+{
+  "slogan": "01000001 — Tutto inizia con un bit.",
+  "debug": "Modalità debug attivata… ma in realtà non è cambiato nulla.",
+  "footer": "akinayhan.com non è ancora pronto… ma la mente ha già iniziato a lavorare.",
+
+  "messages": {
+    "general": [
+      "Questo sito non è vuoto, semplicemente non ha fretta.",
+      "Il codice ha iniziato a muoversi… Le cose si stanno complicando in background :) Saremo online molto presto.",
+      "Stiamo provando cose nuove… A volte le rompiamo, a volte le rendiamo più belle.",
+      "I cicli non finiscono mai, ma ogni passo insegna qualcosa…",
+      "Una condizione if può essere importante quanto una decisione nella vita.",
+      "Tutto aveva senso… finché non l'abbiamo eseguito.",
+      "I pensieri diventano profondi proprio come le righe di codice… e a volte generano errori.",
+      "Gli algoritmi plasmano silenziosamente il mondo; pochi se ne accorgono.",
+      "I commenti sono note che il tuo io del passato lascia al tuo io del futuro.",
+      "Se funziona, non toccarlo… ma non dimenticare perché funziona.",
+      "Alcuni errori non sono nel codice, ma nel modo di vedere le cose.",
+      "Quando il codice tace, gli errori iniziano a parlare.",
+      "La vera maestria non consiste nel saper scrivere codice, ma nel sapere cosa non scrivere.",
+      "Alcune soluzioni sono veloci, altre sono corrette… raramente sono entrambe.",
+      "Ogni 'soluzione temporanea' è candidata a diventare permanente.",
+      "Tra 0 e 1 non ci sono solo dati, ma anche decisioni.",
+      "Ogni sistema porta dentro di sé il proprio caos.",
+      "Quello che pensi sia controllo spesso è solo una coincidenza ben nascosta.",
+      "La realtà potrebbe essere una simulazione ben scritta.",
+      "Ogni ciclo cerca una via d'uscita.",
+      "Tutto sembra deterministico… se non guardi abbastanza da vicino."
+    ],
+
+    "night": [
+      "Alcune cose si comprendono solo di notte.",
+      "Quando le luci si spengono, i sistemi iniziano a parlare."
+    ],
+
+    "day": [
+      "Anche quando tutto è illuminato, alcune cose rimangono nascoste.",
+      "Il codice che funziona di giorno viene messo in discussione di notte."
+    ]
+  },
+
+  "quotes": [
+    "Non so se il momento sia quello giusto… ma sei arrivato.",
+    "Forse non è una questione di tempo, ma del momento in cui ti accorgi delle cose.",
+    "Non avevi programmato di venire qui… ma sei arrivato.",
+    "Se pensi di essere in ritardo, forse sei arrivato in anticipo.",
+    "Alcuni momenti non si scelgono… ci si cade dentro.",
+    "Non so se sei la persona giusta… ma il momento è sospetto.",
+    "Chi controlla davvero se questo è il momento giusto?",
+    "Questo momento non ha un nome… ma tu sei dentro.",
+    "Il fatto che tu sia qui non sembra una piccola coincidenza.",
+    "Il tempo scorre… ma alcuni momenti rimangono fermi.",
+    "Forse non è mai esistito qualcosa come il momento giusto."
+  ]
+}

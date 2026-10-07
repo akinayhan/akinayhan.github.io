@@ -1,0 +1,55 @@
+{
+  "slogan": "01000001 — Everything starts with a bit.",
+  "debug": "Debug mode activated… but actually nothing changed.",
+  "footer": "akinayhan.com isn't ready yet… but the mind is already running.",
+
+  "messages": {
+    "general": [
+      "This site isn't empty, it's just not in a hurry.",
+      "The code has started moving… Things are getting complicated in the background :) We'll be live very soon.",
+      "We're trying new things… Sometimes we break them, sometimes we make them better.",
+      "Loops never end, but every step teaches something…",
+      "An if condition can be as important as a life decision.",
+      "Everything made sense… until we ran it.",
+      "Thoughts deepen just like lines of code… and sometimes they throw errors.",
+      "Algorithms quietly shape the world; few people notice.",
+      "Comments are notes your past self leaves for your future self.",
+      "If it works, don't touch it… but don't forget to understand why it works.",
+      "Some bugs aren't in the code, but in the perspective.",
+      "When the code goes silent, the errors start talking.",
+      "Mastery isn't knowing how to write code, but knowing what not to write.",
+      "Some solutions are fast, some are right… rarely are they both.",
+      "Every 'temporary solution' is a candidate for becoming permanent.",
+      "Between 0 and 1 there is not only data, but decisions.",
+      "Every system carries its own chaos within.",
+      "What you think is control is often just a well-hidden coincidence.",
+      "Reality could be a well-written simulation.",
+      "Every loop searches for an exit.",
+      "Everything looks deterministic… if you don't look closely enough."
+    ],
+
+    "night": [
+      "Some things are only understood at night.",
+      "When the lights go out, systems start talking."
+    ],
+
+    "day": [
+      "Even when everything is bright, some things remain hidden.",
+      "Code that runs during the day is questioned at night."
+    ]
+  },
+
+  "quotes": [
+    "I don't know if the time is right… but you arrived.",
+    "Maybe it's not about time, but the moment you notice.",
+    "You didn't plan to come here… but you did.",
+    "If you think you're late, perhaps you arrived early.",
+    "Some moments aren't chosen… you simply fall into them.",
+    "I don't know if you're the right person… but the timing is suspicious.",
+    "Who even checks whether the timing is right?",
+    "This moment has no name… but you're in it.",
+    "Your being here doesn't look like a small coincidence.",
+    "Time keeps flowing… but some moments stay still.",
+    "Maybe there was never such a thing as the right time."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "slogan": "01000001 — Alles beginnt mit einem Bit.",
+  "debug": "Debug-Modus aktiviert… aber eigentlich hat sich nichts verändert.",
+  "footer": "akinayhan.com ist noch nicht fertig… aber der Geist arbeitet bereits.",
+
+  "messages": {
+    "general": [
+      "Diese Seite ist nicht leer, sie hat es nur nicht eilig.",
+      "Der Code hat angefangen sich zu bewegen… Im Hintergrund wird es kompliziert :) Wir gehen sehr bald online.",
+      "Wir probieren neue Dinge aus… Manchmal geht etwas kaputt, manchmal wird es schöner.",
+      "Schleifen enden nie, aber jeder Schritt lehrt etwas…",
+      "Eine if-Bedingung kann genauso wichtig sein wie eine Lebensentscheidung.",
+      "Alles war logisch… bis wir es ausgeführt haben.",
+      "Gedanken werden genauso tief wie Codezeilen… und manchmal erzeugen sie Fehler.",
+      "Algorithmen formen still die Welt; nur wenige bemerken es.",
+      "Kommentare sind Notizen, die dein früheres Ich deinem zukünftigen Ich hinterlässt.",
+      "Wenn es funktioniert, ändere nichts… aber vergiss nicht, warum es funktioniert.",
+      "Manche Fehler liegen nicht im Code, sondern in der Perspektive.",
+      "Wenn der Code schweigt, beginnen die Fehler zu sprechen.",
+      "Meisterschaft bedeutet nicht, Code schreiben zu können, sondern zu wissen, was man nicht schreiben sollte.",
+      "Manche Lösungen sind schnell, manche richtig… selten sind sie beides.",
+      "Jede 'temporäre Lösung' hat das Potenzial, dauerhaft zu werden.",
+      "Zwischen 0 und 1 liegen nicht nur Daten, sondern auch Entscheidungen.",
+      "Jedes System trägt sein eigenes Chaos in sich.",
+      "Was du für Kontrolle hältst, ist oft nur ein gut versteckter Zufall.",
+      "Die Realität könnte eine gut geschriebene Simulation sein.",
+      "Jede Schleife sucht nach einem Ausweg.",
+      "Alles wirkt deterministisch… wenn man nicht genau hinsieht."
+    ],
+
+    "night": [
+      "Manche Dinge versteht man nur nachts.",
+      "Wenn das Licht ausgeht, beginnen Systeme zu sprechen."
+    ],
+
+    "day": [
+      "Auch wenn alles hell ist, bleiben manche Dinge verborgen.",
+      "Code, der tagsüber läuft, wird nachts hinterfragt."
+    ]
+  },
+
+  "quotes": [
+    "Ich weiß nicht, ob die Zeit richtig ist… aber du bist gekommen.",
+    "Vielleicht geht es nicht um die Zeit, sondern um den Moment des Erkennens.",
+    "Du wolltest nicht unbedingt hierher kommen… aber du bist hier.",
+    "Wenn du glaubst, zu spät zu sein, bist du vielleicht zu früh gekommen.",
+    "Manche Momente werden nicht gewählt… man fällt einfach hinein.",
+    "Ich weiß nicht, ob du die richtige Person bist… aber das Timing ist verdächtig.",
+    "Wer kontrolliert überhaupt, ob der richtige Zeitpunkt gekommen ist?",
+    "Dieser Moment hat keinen Namen… aber du bist darin.",
+    "Dass du hier bist, wirkt nicht wie ein kleines Zufallsereignis.",
+    "Die Zeit fließt… aber manche Momente bleiben stehen.",
+    "Vielleicht gab es nie so etwas wie den richtigen Zeitpunkt."
+  ]
+}
