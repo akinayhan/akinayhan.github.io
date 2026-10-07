@@ -1,96 +1,89 @@
 <!doctype html>
 <html lang="tr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>akinayhan.com</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>akinayhan.com</title>
 
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bunny.css">
+</head>
 
-  <body>
-    <div id="themeWipe"></div>
+<body>
+  <div id="themeWipe"></div>
 
-    <div id="sky">
-      <div id="sun" class="icon">☀️</div>
-      <div id="moon" class="icon">🌙</div>
+  <div id="sky">
+    <div id="sun" class="icon">☀️</div>
+    <div id="moon" class="icon">🌙</div>
+  </div>
+
+  <div id="debugBar" data-i18n="debug">
+    Debug modu açıldı… ama aslında hiçbir şey değişmedi.
+  </div>
+
+  <canvas id="particles"></canvas>
+
+  <div id="themeToggle">🌙</div>
+
+  <div id="languageSwitcher">
+    <button
+      id="languageButton"
+      aria-label="Dil seç"
+      aria-expanded="false"
+      type="button"
+    >🌐</button>
+
+    <div id="languageMenu">
+      <button data-lang="tr" type="button">🇹🇷 Türkçe</button>
+      <button data-lang="en" type="button">🇬🇧 English</button>
+      <button data-lang="de" type="button">🇩🇪 Deutsch</button>
+      <button data-lang="es" type="button">🇪🇸 Español</button>
+      <button data-lang="fr" type="button">🇫🇷 Français</button>
+      <button data-lang="it" type="button">🇮🇹 Italiano</button>
+      <button data-lang="nl" type="button">🇳🇱 Nederlands</button>
+      <button data-lang="zh" type="button">🇨🇳 中文</button>
+      <button data-lang="ko" type="button">🇰🇷 한국어</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>akinayhan.com</h1>
+
+    <div class="slogan" data-i18n="slogan">
+      01000001 — Her şey bir bit’le başlar.
     </div>
 
-    <div id="debugBar" data-i18n="debug">
-      Debug modu açıldı… ama aslında hiçbir şey değişmedi.
+    <div class="typewriter">
+      <span id="text"></span><span class="cursor"></span>
     </div>
 
-    <canvas id="particles"></canvas>
+    <footer data-i18n="footer">
+      © <span id="year"></span> · akinayhan.com henüz hazır değil…
+      ama zihni çoktan çalışmaya başladı.
+    </footer>
+  </div>
 
-    <div id="themeToggle">🌙</div>
+  <div id="floatingQuotes"></div>
 
-    <div id="languageSwitcher">
-      <button
-        id="languageButton"
-        aria-label="Dil seç"
-        aria-expanded="false"
-        type="button"
-      >
-        🌐
-      </button>
+<div id="easterBunny" aria-hidden="true">
+  <div class="rabbit-trail"></div>
+  <div class="rabbit-trail-soft"></div>
 
-      <div id="languageMenu">
-        <button data-lang="tr" type="button">🇹🇷 Türkçe</button>
+  <div class="rabbit">
+    <div class="rabbit-ear rabbit-ear-back"></div>
+    <div class="rabbit-ear rabbit-ear-front"></div>
+    <div class="rabbit-body"></div>
+    <div class="rabbit-tail"></div>
+    <div class="rabbit-head"></div>
+    <div class="rabbit-eye"></div>
+    <div class="rabbit-nose"></div>
+    <div class="rabbit-leg rabbit-leg-back"></div>
+    <div class="rabbit-leg rabbit-leg-front"></div>
+  </div>
+</div>
 
-        <button data-lang="en" type="button">🇬🇧 English</button>
-
-        <button data-lang="de" type="button">🇩🇪 Deutsch</button>
-
-        <button data-lang="es" type="button">🇪🇸 Español</button>
-
-        <button data-lang="fr" type="button">🇫🇷 Français</button>
-
-        <button data-lang="it" type="button">🇮🇹 Italiano</button>
-
-        <button data-lang="nl" type="button">🇳🇱 Nederlands</button>
-
-        <button data-lang="zh" type="button">🇨🇳 中文</button>
-
-        <button data-lang="ko" type="button">🇰🇷 한국어</button>
-      </div>
-    </div>
-
-    <div class="container">
-      <h1>akinayhan.com</h1>
-
-      <div class="slogan" data-i18n="slogan">
-        01000001 — Her şey bir bit’le başlar.
-      </div>
-
-      <div class="typewriter">
-        <span id="text"></span><span class="cursor"></span>
-      </div>
-
-      <footer data-i18n="footer">
-        © <span id="year"></span> · akinayhan.com henüz hazır değil… ama zihni
-        çoktan çalışmaya başladı.
-      </footer>
-    </div>
-
-    <div id="floatingQuotes"></div>
-
-    <div id="easterBunny" aria-hidden="true">
-      <div class="rabbit">
-        <div class="rabbit-ear rabbit-ear-back"></div>
-        <div class="rabbit-ear rabbit-ear-front"></div>
-
-        <div class="rabbit-body"></div>
-        <div class="rabbit-tail"></div>
-        <div class="rabbit-head"></div>
-        <div class="rabbit-eye"></div>
-        <div class="rabbit-nose"></div>
-
-        <div class="rabbit-leg rabbit-leg-back"></div>
-        <div class="rabbit-leg rabbit-leg-front"></div>
-      </div>
-    </div>
-
-    <script src="js/i18n.js"></script>
-    <script src="js/script.js"></script>
-  </body>
+  <script src="js/i18n.js"></script>
+  <script src="js/bunny.js"></script>
+  <script src="js/script.js"></script>
+</body>
 </html>

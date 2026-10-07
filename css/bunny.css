@@ -1,0 +1,281 @@
+#easterBunny {
+  position: fixed;
+  left: -100px;
+  bottom: 9%;
+  width: 100px;
+  height: 70px;
+  z-index: 998;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#easterBunny.run {
+  animation: rabbitRun 4.8s linear forwards;
+}
+
+/* BACKGROUND LIGHT */
+
+.rabbit-trail,
+.rabbit-trail-soft {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.rabbit-trail {
+  width: 70px;
+  height: 18px;
+  left: -38px;
+  top: 42px;
+  border: 1px solid var(--accent);
+  opacity: .12;
+  filter: blur(4px);
+  transform: rotate(-4deg);
+  animation: trailMove .7s ease-in-out infinite;
+}
+
+.rabbit-trail-soft {
+  width: 100px;
+  height: 35px;
+  left: -55px;
+  top: 34px;
+  background: var(--accent);
+  opacity: .045;
+  filter: blur(13px);
+  animation: smokeMove 1.3s ease-in-out infinite;
+}
+
+/* RABBIT */
+
+.rabbit {
+  position: relative;
+  width: 80px;
+  height: 65px;
+  transform-origin: center bottom;
+  animation: rabbitHop .65s ease-in-out infinite;
+  filter: drop-shadow(0 0 2px rgba(94,234,212,.35));
+}
+
+/* BODY */
+
+.rabbit-body {
+  position: absolute;
+  width: 42px;
+  height: 28px;
+  left: 17px;
+  top: 25px;
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 55% 50% 45% 50%;
+  border: 1px solid color-mix(in srgb, var(--accent) 90%, white 10%);
+  box-shadow: 0 0 5px rgba(94,234,212,.18);
+}
+
+/* HEAD */
+
+.rabbit-head {
+  position: absolute;
+  width: 25px;
+  height: 24px;
+  left: 48px;
+  top: 18px;
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 50% 55% 45% 50%;
+  border: 1px solid color-mix(in srgb, var(--accent) 90%, white 10%);
+  box-shadow: 0 0 5px rgba(94,234,212,.18);
+}
+
+/* EARS */
+
+.rabbit-ear {
+  position: absolute;
+  width: 9px;
+  height: 28px;
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 70% 70% 40% 40%;
+  border: 1px solid color-mix(in srgb, var(--accent) 90%, white 10%);
+  transform-origin: bottom center;
+}
+
+.rabbit-ear-back {
+  left: 50px;
+  top: -4px;
+  transform: rotate(-12deg);
+}
+
+.rabbit-ear-front {
+  left: 61px;
+  top: -7px;
+  height: 31px;
+  transform: rotate(8deg);
+}
+
+/* EYE */
+
+.rabbit-eye {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  left: 64px;
+  top: 26px;
+  background: var(--bg);
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(255,255,255,.9);
+}
+
+/* NOSE */
+
+.rabbit-nose {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  left: 71px;
+  top: 31px;
+  background: var(--bg);
+  border-radius: 50%;
+}
+
+/* TAIL */
+
+.rabbit-tail {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 5px;
+  top: 22px;
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--accent) 90%, white 10%);
+  box-shadow: 0 0 5px rgba(94,234,212,.16);
+}
+
+/* LEGS */
+
+.rabbit-leg {
+  position: absolute;
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 50%;
+  transform-origin: center top;
+}
+
+.rabbit-leg-back {
+  width: 18px;
+  height: 7px;
+  left: 20px;
+  top: 49px;
+  transform: rotate(12deg);
+  animation: backLeg .22s ease-in-out infinite alternate;
+}
+
+.rabbit-leg-front {
+  width: 16px;
+  height: 7px;
+  left: 48px;
+  top: 49px;
+  transform: rotate(-8deg);
+  animation: frontLeg .22s ease-in-out infinite alternate;
+}
+
+/* RUN */
+
+@keyframes rabbitRun {
+  0% {
+    left: -100px;
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    left: calc(100% + 100px);
+    opacity: 0;
+  }
+}
+
+/* HOP */
+
+@keyframes rabbitHop {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  20% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(-4deg);
+  }
+
+  80% {
+    transform: translateY(-7px) rotate(-1deg);
+  }
+}
+
+/* LEGS */
+
+@keyframes backLeg {
+  0% {
+    transform: rotate(12deg) translateX(-2px);
+  }
+
+  100% {
+    transform: rotate(4deg) translateX(3px);
+  }
+}
+
+@keyframes frontLeg {
+  0% {
+    transform: rotate(-8deg) translateX(3px);
+  }
+
+  100% {
+    transform: rotate(5deg) translateX(-2px);
+  }
+}
+
+/* LIGHT TRAIL */
+
+@keyframes trailMove {
+  0%,
+  100% {
+    opacity: .06;
+    transform: translateX(8px) scaleX(.7) rotate(-4deg);
+  }
+
+  50% {
+    opacity: .16;
+    transform: translateX(-3px) scaleX(1) rotate(-4deg);
+  }
+}
+
+/* SMOKE */
+
+@keyframes smokeMove {
+  0%,
+  100% {
+    opacity: .025;
+    transform: translateX(10px) scale(.8);
+  }
+
+  50% {
+    opacity: .07;
+    transform: translateX(-8px) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rabbit,
+  .rabbit-leg-back,
+  .rabbit-leg-front,
+  .rabbit-trail,
+  .rabbit-trail-soft {
+    animation: none;
+  }
+}

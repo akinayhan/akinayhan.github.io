@@ -1,13 +1,8 @@
-/* ===================== YEAR ===================== */
-
 const yearElement = document.getElementById("year");
 
 if (yearElement) {
   yearElement.textContent = new Date().getFullYear();
 }
-
-
-/* ===================== THEME ===================== */
 
 let theme = "dark";
 
@@ -43,17 +38,10 @@ toggle.onclick = () => {
 
   setTimeout(() => {
     if (next === "light") {
-      document.documentElement.setAttribute(
-        "data-theme",
-        "light"
-      );
-
+      document.documentElement.setAttribute("data-theme", "light");
       theme = "light";
     } else {
-      document.documentElement.removeAttribute(
-        "data-theme"
-      );
-
+      document.documentElement.removeAttribute("data-theme");
       theme = "dark";
     }
 
@@ -63,182 +51,105 @@ toggle.onclick = () => {
 
   setTimeout(() => {
     wipe.classList.remove("active");
-
     sun.style.animation = "";
     moon.style.animation = "";
   }, 800);
 };
 
-
-/* ===================== DEBUG / EASTER EGG ===================== */
-
-const debugBar =
-  document.getElementById("debugBar");
-
-const easterBunny =
-  document.getElementById("easterBunny");
-
-let clicks = 0;
-
-function runEasterBunny() {
-  easterBunny.classList.remove("run");
-
-  void easterBunny.offsetWidth;
-
-  easterBunny.classList.add("run");
-}
-
-document.body.onclick = () => {
-  if (++clicks === 5) {
-
-    debugBar.classList.add("show");
-
-    runEasterBunny();
-
-    setTimeout(() => {
-      debugBar.classList.remove("show");
-    }, 3000);
-
-    clicks = 0;
-  }
-};
-
-/* ===================== MESSAGES ===================== */
-
-let deck = [];
+const deck = [];
 
 function refillDeck() {
-  if (!translations) {
-    return;
+  if (!translations) return;
+
+  const messages = translations.messages || {};
+  const general = messages.general || [];
+  const themed = theme === "dark"
+    ? (messages.night || [])
+    : (messages.day || []);
+
+  deck.length = 0;
+  deck.push(...general, ...themed);
+
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
   }
-
-  let list = [
-    ...translations.messages.general,
-    ...(theme === "dark"
-      ? translations.messages.night
-      : translations.messages.day)
-  ];
-
-  for (let i = list.length - 1; i > 0; i--) {
-    const j = Math.floor(
-      Math.random() * (i + 1)
-    );
-
-    [list[i], list[j]] = [list[j], list[i]];
-  }
-
-  deck = list;
 }
 
 function nextMsg() {
-  if (deck.length === 0) {
+  if (!deck.length) {
     refillDeck();
   }
 
   return deck.pop() || "";
 }
 
-
-/* ===================== TYPEWRITER ===================== */
-
-let msg = "";
-let i = 0;
-let typewriterTimer = null;
-
-const el = document.getElementById("text");
-
-function clearTypewriter() {
-  if (typewriterTimer) {
-    clearTimeout(typewriterTimer);
-    typewriterTimer = null;
-  }
-}
+const textElement = document.getElementById("text");
+let typingTimer = null;
 
 function startTypewriter() {
-  clearTypewriter();
+  if (!textElement) return;
 
-  msg = nextMsg();
-  i = 0;
+  clearTimeout(typingTimer);
 
-  el.textContent = "";
+  const message = nextMsg();
+  let index = 0;
+
+  textElement.textContent = "";
+
+  function type() {
+    if (index < message.length) {
+      textElement.textContent += message[index++];
+      typingTimer = setTimeout(type, 35);
+      return;
+    }
+
+    typingTimer = setTimeout(erase, 2000);
+  }
+
+  function erase() {
+    if (index > 0) {
+      textElement.textContent = message.slice(0, --index);
+      typingTimer = setTimeout(erase, 20);
+      return;
+    }
+
+    typingTimer = setTimeout(startTypewriter, 400);
+  }
 
   type();
 }
 
-function type() {
-  if (i < msg.length) {
-    el.textContent += msg[i++];
+window.addEventListener("languageChanged", () => {
+  refillDeck();
+  startTypewriter();
+  showFirstQuote();
+});
 
-    typewriterTimer = setTimeout(
-      type,
-      35
-    );
-  } else {
-    typewriterTimer = setTimeout(
-      erase,
-      2000
-    );
-  }
-}
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
 
-function erase() {
-  if (i > 0) {
-    el.textContent = msg.substring(
-      0,
-      --i
-    );
-
-    typewriterTimer = setTimeout(
-      erase,
-      20
-    );
-  } else {
-    msg = nextMsg();
-
-    typewriterTimer = setTimeout(
-      type,
-      400
-    );
-  }
-}
-
-
-/* ===================== LANGUAGE CHANGE ===================== */
-
-window.addEventListener(
-  "languageChanged",
-  () => {
-    refillDeck();
-    startTypewriter();
-    showFirstQuote();
-  }
-);
-
-
-/* ===================== PARTICLES ===================== */
-
-const c = document.getElementById("particles");
-const ctx = c.getContext("2d");
+let particles = [];
 
 function resize() {
-  c.width = innerWidth;
-  c.height = innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 
+window.addEventListener("resize", resize);
 resize();
 
-onresize = resize;
-
-class P {
+class Particle {
   constructor() {
-    this.x = Math.random() * c.width;
-    this.y = Math.random() * c.height;
+    this.reset();
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+  }
 
-    this.vx =
-      (Math.random() - 0.5) * 0.6;
-
-    this.vy =
-      (Math.random() - 0.5) * 0.6;
+  reset() {
+    this.vx = (Math.random() - .5) * .3;
+    this.vy = (Math.random() - .5) * .3;
+    this.size = Math.random() * 1.5 + .5;
   }
 
   update() {
@@ -247,74 +158,51 @@ class P {
 
     if (
       this.x < 0 ||
-      this.x > c.width ||
+      this.x > canvas.width ||
       this.y < 0 ||
-      this.y > c.height
+      this.y > canvas.height
     ) {
-      this.x = Math.random() * c.width;
-      this.y = Math.random() * c.height;
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
     }
   }
 
   draw() {
-    ctx.fillStyle =
-      getComputedStyle(
-        document.documentElement
-      ).getPropertyValue(
-        "--particle"
-      );
+    const color = getComputedStyle(document.documentElement)
+      .getPropertyValue("--particle")
+      .trim();
 
+    ctx.fillStyle = color;
     ctx.beginPath();
-
-    ctx.arc(
-      this.x,
-      this.y,
-      1.8,
-      0,
-      Math.PI * 2
-    );
-
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fill();
   }
 }
 
-let ps = [];
-
 for (let i = 0; i < 140; i++) {
-  ps.push(new P());
+  particles.push(new Particle());
 }
 
-(function anim() {
-  ctx.clearRect(
-    0,
-    0,
-    c.width,
-    c.height
-  );
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ps.forEach(p => {
-    p.update();
-    p.draw();
+  particles.forEach(particle => {
+    particle.update();
+    particle.draw();
   });
 
-  requestAnimationFrame(anim);
-})();
+  requestAnimationFrame(animateParticles);
+}
 
+animateParticles();
 
-/* ===================== FLOATING POEM ===================== */
+const floatingQuotes = document.getElementById("floatingQuotes");
 
-const box =
-  document.getElementById(
-    "floatingQuotes"
-  );
-
-let qi = 0;
-let side = false;
+let quoteIndex = 0;
+let quoteSide = false;
 
 function getQuotes() {
-  if (!translations) {
-    return [];
-  }
+  if (!translations) return [];
 
   return translations.quotes || [];
 }
@@ -322,64 +210,43 @@ function getQuotes() {
 function showFirstQuote() {
   const quotes = getQuotes();
 
-  if (!quotes.length) {
-    return;
-  }
+  if (!quotes.length || !floatingQuotes) return;
 
-  box.textContent = quotes[0];
+  quoteIndex = 0;
+  floatingQuotes.textContent = quotes[quoteIndex];
 
-  box.classList.remove("dust-out");
-  box.classList.add("dust-in");
-
-  qi = 1;
+  floatingQuotes.classList.remove("right", "dust-out");
+  floatingQuotes.classList.add("dust-in");
 }
 
 function flow() {
   const quotes = getQuotes();
 
-  if (!quotes.length) {
-    return;
-  }
+  if (!quotes.length || !floatingQuotes) return;
 
-  box.classList.remove("dust-in");
-  box.classList.add("dust-out");
+  floatingQuotes.classList.remove("dust-in");
+  floatingQuotes.classList.add("dust-out");
 
   setTimeout(() => {
-    side = !side;
+    quoteIndex = (quoteIndex + 1) % quotes.length;
+    quoteSide = !quoteSide;
 
-    box.classList.toggle(
-      "right",
-      side
-    );
+    floatingQuotes.textContent = quotes[quoteIndex];
+    floatingQuotes.classList.toggle("right", quoteSide);
 
-    box.textContent = quotes[qi];
-
-    qi =
-      (qi + 1) %
-      quotes.length;
-
-    box.classList.remove("dust-out");
-    box.classList.add("dust-in");
+    floatingQuotes.classList.remove("dust-out");
+    floatingQuotes.classList.add("dust-in");
   }, 800);
 }
 
-setInterval(
-  flow,
-  3500
-);
+setInterval(flow, 3500);
 
+const waitForTranslations = setInterval(() => {
+  if (translations) {
+    clearInterval(waitForTranslations);
 
-/* ===================== START ===================== */
-
-const waitForTranslations =
-  setInterval(() => {
-    if (translations) {
-      clearInterval(
-        waitForTranslations
-      );
-
-      refillDeck();
-      startTypewriter();
-      showFirstQuote();
-    }
-  }, 50);
+    refillDeck();
+    startTypewriter();
+    showFirstQuote();
+  }
+}, 50);

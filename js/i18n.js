@@ -11,361 +11,150 @@ const supportedLanguages = [
 ];
 
 const defaultLanguage = "tr";
-
 let currentLanguage = defaultLanguage;
 let translations = null;
-
-
-/* ===================== LANGUAGE DETECTION ===================== */
 
 function getSavedLanguage() {
   return localStorage.getItem("language");
 }
 
 function getBrowserLanguage() {
-
-  const languages =
-    navigator.languages || [
-      navigator.language
-    ];
+  const languages = navigator.languages || [navigator.language];
 
   for (const browserLanguage of languages) {
+    const language = browserLanguage.toLowerCase().split("-")[0];
 
-    const language =
-      browserLanguage
-        .toLowerCase()
-        .split("-")[0];
-
-    if (
-      supportedLanguages.includes(
-        language
-      )
-    ) {
+    if (supportedLanguages.includes(language)) {
       return language;
     }
-
   }
 
   return null;
 }
 
 function detectLanguage() {
+  const savedLanguage = getSavedLanguage();
 
-  const savedLanguage =
-    getSavedLanguage();
-
-  if (
-    savedLanguage &&
-    supportedLanguages.includes(
-      savedLanguage
-    )
-  ) {
+  if (savedLanguage && supportedLanguages.includes(savedLanguage)) {
     return savedLanguage;
   }
 
-  return (
-    getBrowserLanguage() ||
-    defaultLanguage
-  );
-
+  return getBrowserLanguage() || defaultLanguage;
 }
 
-
-/* ===================== LOAD LANGUAGE ===================== */
-
 async function loadLanguage(language) {
-
-  if (
-    !supportedLanguages.includes(
-      language
-    )
-  ) {
-    language =
-      defaultLanguage;
+  if (!supportedLanguages.includes(language)) {
+    language = defaultLanguage;
   }
 
   try {
-
-    const response =
-      await fetch(
-        `locales/${language}.json`
-      );
+    const response = await fetch(`locales/${language}.json`);
 
     if (!response.ok) {
-
-      throw new Error(
-        `Language file could not be loaded: ${language}`
-      );
-
+      throw new Error(`Language file could not be loaded: ${language}`);
     }
 
-    translations =
-      await response.json();
+    translations = await response.json();
+    currentLanguage = language;
 
-    currentLanguage =
-      language;
-
-    document.documentElement.lang =
-      language;
+    document.documentElement.lang = language;
 
     applyTranslations();
-
     updateLanguageSwitcher();
 
-    localStorage.setItem(
-      "language",
-      language
-    );
+    localStorage.setItem("language", language);
 
-    window.dispatchEvent(
-      new Event(
-        "languageChanged"
-      )
-    );
-
+    window.dispatchEvent(new Event("languageChanged"));
   } catch (error) {
-
-    console.error(
-      "i18n error:",
-      error
-    );
-
+    console.error("i18n error:", error);
   }
-
 }
 
-
-/* ===================== TRANSLATION ===================== */
-
 function translate(key) {
-
-  const parts =
-    key.split(".");
-
-  let value =
-    translations;
+  const parts = key.split(".");
+  let value = translations;
 
   for (const part of parts) {
-
-    if (
-      value &&
-      Object.prototype.hasOwnProperty.call(
-        value,
-        part
-      )
-    ) {
-
-      value =
-        value[part];
-
+    if (value && Object.prototype.hasOwnProperty.call(value, part)) {
+      value = value[part];
     } else {
-
       return key;
-
     }
-
   }
 
   return value;
-
 }
-
-
-/* ===================== APPLY TRANSLATIONS ===================== */
 
 function applyTranslations() {
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    const key = element.dataset.i18n;
+    const value = translate(key);
 
-  document
-    .querySelectorAll(
-      "[data-i18n]"
-    )
-    .forEach(element => {
+    if (key === "footer") {
+      element.innerHTML = `© <span id="year"></span> · ${value}`;
 
-      const key =
-        element.dataset.i18n;
+      const year = document.getElementById("year");
 
-      const value =
-        translate(key);
-
-      if (key === "footer") {
-
-        element.innerHTML =
-          `© <span id="year"></span> · ${value}`;
-
-        const year =
-          document.getElementById(
-            "year"
-          );
-
-        if (year) {
-
-          year.textContent =
-            new Date()
-              .getFullYear();
-
-        }
-
-      } else {
-
-        element.textContent =
-          value;
-
+      if (year) {
+        year.textContent = new Date().getFullYear();
       }
-
-    });
-
+    } else {
+      element.textContent = value;
+    }
+  });
 }
 
+const languageSwitcher = document.getElementById("languageSwitcher");
+const languageButton = document.getElementById("languageButton");
+const languageMenu = document.getElementById("languageMenu");
 
-/* ===================== LANGUAGE SWITCHER ===================== */
+languageButton.addEventListener("click", event => {
+  event.stopPropagation();
 
-const languageSwitcher =
-  document.getElementById(
-    "languageSwitcher"
-  );
+  const isOpen = languageSwitcher.classList.toggle("open");
 
-const languageButton =
-  document.getElementById(
-    "languageButton"
-  );
+  languageButton.classList.toggle("active", isOpen);
+  languageButton.setAttribute("aria-expanded", isOpen);
+});
 
-const languageMenu =
-  document.getElementById(
-    "languageMenu"
-  );
-
-
-/* OPEN / CLOSE */
-
-languageButton.addEventListener(
-  "click",
-  event => {
-
+languageMenu.querySelectorAll("button").forEach(button => {
+  button.addEventListener("click", event => {
     event.stopPropagation();
 
-    const isOpen =
-      languageSwitcher.classList.toggle(
-        "open"
-      );
+    const language = button.dataset.lang;
 
-    languageButton.classList.toggle(
-      "active",
-      isOpen
-    );
-
-    languageButton.setAttribute(
-      "aria-expanded",
-      isOpen
-    );
-
-  }
-);
-
-
-/* LANGUAGE SELECTION */
-
-languageMenu
-  .querySelectorAll("button")
-  .forEach(button => {
-
-    button.addEventListener(
-      "click",
-      event => {
-
-        event.stopPropagation();
-
-        const language =
-          button.dataset.lang;
-
-        if (
-          language !==
-          currentLanguage
-        ) {
-
-          loadLanguage(
-            language
-          );
-
-        }
-
-        closeLanguageMenu();
-
-      }
-    );
-
-  });
-
-
-/* CLOSE */
-
-function closeLanguageMenu() {
-
-  languageSwitcher.classList.remove(
-    "open"
-  );
-
-  languageButton.classList.remove(
-    "active"
-  );
-
-  languageButton.setAttribute(
-    "aria-expanded",
-    "false"
-  );
-
-}
-
-
-/* CLICK OUTSIDE */
-
-document.addEventListener(
-  "click",
-  event => {
-
-    if (
-      !languageSwitcher.contains(
-        event.target
-      )
-    ) {
-
-      closeLanguageMenu();
-
+    if (language !== currentLanguage) {
+      loadLanguage(language);
     }
 
-  }
-);
+    closeLanguageMenu();
+  });
+});
 
-
-/* ACTIVE LANGUAGE */
-
-function updateLanguageSwitcher() {
-
-  languageMenu
-    .querySelectorAll("button")
-    .forEach(button => {
-
-      button.classList.toggle(
-        "active",
-        button.dataset.lang ===
-          currentLanguage
-      );
-
-    });
-
+function closeLanguageMenu() {
+  languageSwitcher.classList.remove("open");
+  languageButton.classList.remove("active");
+  languageButton.setAttribute("aria-expanded", "false");
 }
 
+document.addEventListener("click", event => {
+  if (!languageSwitcher.contains(event.target)) {
+    closeLanguageMenu();
+  }
+});
 
-/* ===================== INIT ===================== */
+function updateLanguageSwitcher() {
+  languageMenu.querySelectorAll("button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.lang === currentLanguage
+    );
+  });
+}
 
 async function initI18n() {
-
-  const language =
-    detectLanguage();
-
-  await loadLanguage(
-    language
-  );
-
+  const language = detectLanguage();
+  await loadLanguage(language);
 }
 
 initI18n();
